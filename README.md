@@ -1,4 +1,4 @@
-To run project, run in project directory:
+To start project, run in project directory:
 
 ```
 docker-compose up -d
