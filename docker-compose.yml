@@ -1,0 +1,34 @@
+version: "3.4"
+
+services:
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - testNetwork
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+    networks:
+      - testNetwork
+  
+  db: 
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Rootroot@1"
+    networks:
+      - testNetwork
+
+networks:
+  testNetwork:
+    driver: bridge
